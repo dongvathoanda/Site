@@ -1,0 +1,563 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Theo Dõi Tập Tính Sư Tử - Vườn Thú</title>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Open Sans', sans-serif;
+            background-image: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.7)), 
+                              url('https://images.unsplash.com/photo-1546182990-dffeafbe841d?w=1920&q=80');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            min-height: 100vh;
+        }
+        .title-font {
+            font-family: 'Playfair Display', serif;
+        }
+        .glass-card {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        .progress-bar {
+            transition: width 0.5s ease-in-out;
+        }
+        .indicator-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+        }
+        .pulse-dot {
+            animation: pulse 2s infinite;
+        }
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+    </style>
+</head>
+<body class="text-white">
+    <!-- Header -->
+    <header class="py-6 px-4">
+        <div class="max-w-7xl mx-auto">
+            <div class="glass-card rounded-2xl p-6 flex flex-col md:flex-row items-center justify-between">
+                <div class="flex items-center gap-4 mb-4 md:mb-0">
+                    <div class="text-5xl">🦁</div>
+                    <div>
+                        <h1 class="title-font text-3xl md:text-4xl font-bold text-amber-400">Theo Dõi Tập Tính Sư Tử</h1>
+                        <p class="text-gray-300">Hệ thống giám sát hành vi - Vườn thú Quốc gia</p>
+                    </div>
+                </div>
+                <div class="flex items-center gap-3">
+                    <span class="pulse-dot w-3 h-3 bg-green-500 rounded-full"></span>
+                    <span class="text-green-400 font-semibold">Đang hoạt động</span>
+                    <span id="currentTime" class="ml-4 text-gray-300"></span>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="px-4 pb-10">
+        <div class="max-w-7xl mx-auto">
+            <!-- Lion Info Card -->
+            <div class="glass-card rounded-2xl p-6 mb-8">
+                <h2 class="text-xl font-semibold text-amber-400 mb-4">📋 Thông Tin Cá Thể</h2>
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+                    <div class="bg-white/10 rounded-lg p-4">
+                        <p class="text-gray-400 text-sm">Tên</p>
+                        <p class="text-xl font-bold">Simba</p>
+                    </div>
+                    <div class="bg-white/10 rounded-lg p-4">
+                        <p class="text-gray-400 text-sm">Giới tính</p>
+                        <p class="text-xl font-bold">Đực ♂</p>
+                    </div>
+                    <div class="bg-white/10 rounded-lg p-4">
+                        <p class="text-gray-400 text-sm">Tuổi</p>
+                        <p class="text-xl font-bold">7 năm</p>
+                    </div>
+                    <div class="bg-white/10 rounded-lg p-4">
+                        <p class="text-gray-400 text-sm">Cân nặng</p>
+                        <p class="text-xl font-bold">185 kg</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Behavioral Indicators Grid -->
+            <h2 class="text-2xl font-bold text-amber-400 mb-6 title-font">📊 Các Chỉ Tiêu Tập Tính</h2>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
+                <!-- 1. Hoạt động di chuyển -->
+                <div class="indicator-card glass-card rounded-2xl p-6 transition-all duration-300">
+                    <div class="flex items-center gap-3 mb-4">
+                        <span class="text-3xl">🚶</span>
+                        <h3 class="text-lg font-semibold">Hoạt Động Di Chuyển</h3>
+                    </div>
+                    <div class="space-y-3">
+                        <div>
+                            <div class="flex justify-between text-sm mb-1">
+                                <span>Đi lại/Tuần tra</span>
+                                <span id="walking-value">65%</span>
+                            </div>
+                            <div class="h-2 bg-white/20 rounded-full">
+                                <div id="walking-bar" class="progress-bar h-full bg-blue-500 rounded-full" style="width: 65%"></div>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="flex justify-between text-sm mb-1">
+                                <span>Chạy/Vận động mạnh</span>
+                                <span id="running-value">25%</span>
+                            </div>
+                            <div class="h-2 bg-white/20 rounded-full">
+                                <div id="running-bar" class="progress-bar h-full bg-green-500 rounded-full" style="width: 25%"></div>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="flex justify-between text-sm mb-1">
+                                <span>Di chuyển định hình*</span>
+                                <span id="stereotypic-value">10%</span>
+                            </div>
+                            <div class="h-2 bg-white/20 rounded-full">
+                                <div id="stereotypic-bar" class="progress-bar h-full bg-red-500 rounded-full" style="width: 10%"></div>
+                            </div>
+                        </div>
+                        <p class="text-xs text-gray-400 mt-2">*Hành vi lặp đi lặp lại bất thường</p>
+                    </div>
+                </div>
+
+                <!-- 2. Nghỉ ngơi & Ngủ -->
+                <div class="indicator-card glass-card rounded-2xl p-6 transition-all duration-300">
+                    <div class="flex items-center gap-3 mb-4">
+                        <span class="text-3xl">😴</span>
+                        <h3 class="text-lg font-semibold">Nghỉ Ngơi & Ngủ</h3>
+                    </div>
+                    <div class="grid grid-cols-2 gap-4">
+                        <div class="text-center bg-white/10 rounded-lg p-3">
+                            <p class="text-3xl font-bold text-purple-400" id="sleep-hours">14.5</p>
+                            <p class="text-sm text-gray-400">Giờ ngủ/ngày</p>
+                        </div>
+                        <div class="text-center bg-white/10 rounded-lg p-3">
+                            <p class="text-3xl font-bold text-indigo-400" id="rest-hours">4.2</p>
+                            <p class="text-sm text-gray-400">Giờ nghỉ/ngày</p>
+                        </div>
+                    </div>
+                    <div class="mt-4">
+                        <p class="text-sm text-gray-300 mb-2">Vị trí nghỉ ưa thích:</p>
+                        <div class="flex flex-wrap gap-2">
+                            <span class="px-3 py-1 bg-amber-600/50 rounded-full text-xs">Bãi cỏ cao</span>
+                            <span class="px-3 py-1 bg-amber-600/50 rounded-full text-xs">Đá lớn</span>
+                            <span class="px-3 py-1 bg-amber-600/50 rounded-full text-xs">Bóng cây</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 3. Ăn uống -->
+                <div class="indicator-card glass-card rounded-2xl p-6 transition-all duration-300">
+                    <div class="flex items-center gap-3 mb-4">
+                        <span class="text-3xl">🍖</span>
+                        <h3 class="text-lg font-semibold">Hành Vi Ăn Uống</h3>
+                    </div>
+                    <div class="space-y-3">
+                        <div class="flex justify-between items-center bg-white/10 rounded-lg p-3">
+                            <span>Lượng thức ăn/ngày</span>
+                            <span class="font-bold text-orange-400" id="food-amount">8.5 kg</span>
+                        </div>
+                        <div class="flex justify-between items-center bg-white/10 rounded-lg p-3">
+                            <span>Thời gian ăn TB</span>
+                            <span class="font-bold text-orange-400" id="eating-time">25 phút</span>
+                        </div>
+                        <div class="flex justify-between items-center bg-white/10 rounded-lg p-3">
+                            <span>Lượng nước uống</span>
+                            <span class="font-bold text-blue-400" id="water-amount">5.2 L</span>
+                        </div>
+                        <div class="flex justify-between items-center bg-white/10 rounded-lg p-3">
+                            <span>Mức độ thèm ăn</span>
+                            <span class="font-bold text-green-400">Bình thường ✓</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 4. Tương tác xã hội -->
+                <div class="indicator-card glass-card rounded-2xl p-6 transition-all duration-300">
+                    <div class="flex items-center gap-3 mb-4">
+                        <span class="text-3xl">👥</span>
+                        <h3 class="text-lg font-semibold">Tương Tác Xã Hội</h3>
+                    </div>
+                    <div class="space-y-3">
+                        <div>
+                            <div class="flex justify-between text-sm mb-1">
+                                <span>Với con cái</span>
+                                <span class="text-pink-400">Tích cực</span>
+                            </div>
+                            <div class="h-2 bg-white/20 rounded-full">
+                                <div class="progress-bar h-full bg-pink-500 rounded-full" style="width: 80%"></div>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="flex justify-between text-sm mb-1">
+                                <span>Với con non</span>
+                                <span class="text-cyan-400">Bảo vệ</span>
+                            </div>
+                            <div class="h-2 bg-white/20 rounded-full">
+                                <div class="progress-bar h-full bg-cyan-500 rounded-full" style="width: 70%"></div>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="flex justify-between text-sm mb-1">
+                                <span>Hung hăng</span>
+                                <span class="text-red-400">Thấp</span>
+                            </div>
+                            <div class="h-2 bg-white/20 rounded-full">
+                                <div class="progress-bar h-full bg-red-500 rounded-full" style="width: 15%"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="mt-4 p-3 bg-green-500/20 rounded-lg">
+                        <p class="text-sm text-green-300">✓ Hòa nhập tốt với đàn</p>
+                    </div>
+                </div>
+
+                <!-- 5. Đánh dấu lãnh thổ -->
+                <div class="indicator-card glass-card rounded-2xl p-6 transition-all duration-300">
+                    <div class="flex items-center gap-3 mb-4">
+                        <span class="text-3xl">🏴</span>
+                        <h3 class="text-lg font-semibold">Đánh Dấu Lãnh Thổ</h3>
+                    </div>
+                    <div class="grid grid-cols-2 gap-4 mb-4">
+                        <div class="text-center bg-white/10 rounded-lg p-3">
+                            <p class="text-2xl font-bold text-yellow-400" id="spray-count">12</p>
+                            <p class="text-xs text-gray-400">Lần xịt nước tiểu/ngày</p>
+                        </div>
+                        <div class="text-center bg-white/10 rounded-lg p-3">
+                            <p class="text-2xl font-bold text-yellow-400" id="scratch-count">8</p>
+                            <p class="text-xs text-gray-400">Lần cào cấu/ngày</p>
+                        </div>
+                    </div>
+                    <div class="space-y-2">
+                        <div class="flex items-center gap-2">
+                            <span class="w-2 h-2 bg-green-500 rounded-full"></span>
+                            <span class="text-sm">Gầm gừ lãnh thổ: 5 lần/ngày</span>
+                        </div>
+                        <div class="flex items-center gap-2">
+                            <span class="w-2 h-2 bg-blue-500 rounded-full"></span>
+                            <span class="text-sm">Cọ đầu đánh dấu: 15 lần/ngày</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 6. Phát âm -->
+                <div class="indicator-card glass-card rounded-2xl p-6 transition-all duration-300">
+                    <div class="flex items-center gap-3 mb-4">
+                        <span class="text-3xl">🔊</span>
+                        <h3 class="text-lg font-semibold">Phát Âm & Giao Tiếp</h3>
+                    </div>
+                    <div class="space-y-3">
+                        <div class="flex justify-between items-center bg-white/10 rounded-lg p-3">
+                            <span>🦁 Gầm rống</span>
+                            <span class="font-bold" id="roar-count">3 lần/ngày</span>
+                        </div>
+                        <div class="flex justify-between items-center bg-white/10 rounded-lg p-3">
+                            <span>😼 Gầm gừ</span>
+                            <span class="font-bold" id="growl-count">18 lần/ngày</span>
+                        </div>
+                        <div class="flex justify-between items-center bg-white/10 rounded-lg p-3">
+                            <span>😺 Rên rỉ/Kêu</span>
+                            <span class="font-bold" id="moan-count">7 lần/ngày</span>
+                        </div>
+                        <div class="flex justify-between items-center bg-white/10 rounded-lg p-3">
+                            <span>😤 Khịt mũi</span>
+                            <span class="font-bold" id="snort-count">12 lần/ngày</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 7. Chăm sóc bản thân -->
+                <div class="indicator-card glass-card rounded-2xl p-6 transition-all duration-300">
+                    <div class="flex items-center gap-3 mb-4">
+                        <span class="text-3xl">🧹</span>
+                        <h3 class="text-lg font-semibold">Chăm Sóc Bản Thân</h3>
+                    </div>
+                    <div class="space-y-3">
+                        <div>
+                            <div class="flex justify-between text-sm mb-1">
+                                <span>Liếm lông (tự vệ sinh)</span>
+                                <span>45 phút/ngày</span>
+                            </div>
+                            <div class="h-2 bg-white/20 rounded-full">
+                                <div class="progress-bar h-full bg-teal-500 rounded-full" style="width: 75%"></div>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="flex justify-between text-sm mb-1">
+                                <span>Gãi/Cọ xát</span>
+                                <span>20 phút/ngày</span>
+                            </div>
+                            <div class="h-2 bg-white/20 rounded-full">
+                                <div class="progress-bar h-full bg-teal-500 rounded-full" style="width: 45%"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="mt-4">
+                        <p class="text-sm text-gray-300 mb-2">Tình trạng bộ lông:</p>
+                        <div class="flex items-center gap-2">
+                            <span class="px-3 py-1 bg-green-600/50 rounded-full text-sm">Bóng mượt ✓</span>
+                            <span class="px-3 py-1 bg-green-600/50 rounded-full text-sm">Không rụng bất thường</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 8. Phản ứng với môi trường -->
+                <div class="indicator-card glass-card rounded-2xl p-6 transition-all duration-300">
+                    <div class="flex items-center gap-3 mb-4">
+                        <span class="text-3xl">🌍</span>
+                        <h3 class="text-lg font-semibold">Phản Ứng Môi Trường</h3>
+                    </div>
+                    <div class="space-y-3">
+                        <div class="flex justify-between items-center bg-white/10 rounded-lg p-3">
+                            <span>Với khách tham quan</span>
+                            <span class="px-2 py-1 bg-green-600/50 rounded text-sm">Bình tĩnh</span>
+                        </div>
+                        <div class="flex justify-between items-center bg-white/10 rounded-lg p-3">
+                            <span>Với nhân viên</span>
+                            <span class="px-2 py-1 bg-green-600/50 rounded text-sm">Quen thuộc</span>
+                        </div>
+                        <div class="flex justify-between items-center bg-white/10 rounded-lg p-3">
+                            <span>Với tiếng ồn</span>
+                            <span class="px-2 py-1 bg-yellow-600/50 rounded text-sm">Cảnh giác</span>
+                        </div>
+                        <div class="flex justify-between items-center bg-white/10 rounded-lg p-3">
+                            <span>Với đồ làm giàu</span>
+                            <span class="px-2 py-1 bg-blue-600/50 rounded text-sm">Tò mò</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 9. Stress & Phúc lợi -->
+                <div class="indicator-card glass-card rounded-2xl p-6 transition-all duration-300">
+                    <div class="flex items-center gap-3 mb-4">
+                        <span class="text-3xl">❤️</span>
+                        <h3 class="text-lg font-semibold">Chỉ Số Phúc Lợi</h3>
+                    </div>
+                    <div class="mb-4">
+                        <div class="flex justify-between mb-2">
+                            <span>Mức độ căng thẳng</span>
+                            <span class="text-green-400 font-bold">Thấp</span>
+                        </div>
+                        <div class="h-4 bg-white/20 rounded-full overflow-hidden">
+                            <div class="h-full bg-gradient-to-r from-green-500 via-yellow-500 to-red-500 rounded-full" style="width: 25%"></div>
+                        </div>
+                        <div class="flex justify-between text-xs text-gray-400 mt-1">
+                            <span>Thấp</span>
+                            <span>Trung bình</span>
+                            <span>Cao</span>
+                        </div>
+                    </div>
+                    <div class="space-y-2 text-sm">
+                        <div class="flex items-center gap-2">
+                            <span class="text-green-500">✓</span>
+                            <span>Không có hành vi định hình quá mức</span>
+                        </div>
+                        <div class="flex items-center gap-2">
+                            <span class="text-green-500">✓</span>
+                            <span>Ngủ đủ giấc</span>
+                        </div>
+                        <div class="flex items-center gap-2">
+                            <span class="text-green-500">✓</span>
+                            <span>Ăn uống bình thường</span>
+                        </div>
+                        <div class="flex items-center gap-2">
+                            <span class="text-green-500">✓</span>
+                            <span>Tương tác xã hội tốt</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Daily Activity Timeline -->
+            <div class="glass-card rounded-2xl p-6 mb-8">
+                <h2 class="text-xl font-semibold text-amber-400 mb-4">⏰ Biểu Đồ Hoạt Động Trong Ngày</h2>
+                <div class="overflow-x-auto">
+                    <div class="flex gap-2 min-w-max pb-4">
+                        <div class="flex flex-col items-center">
+                            <div class="w-12 h-20 bg-purple-600/50 rounded-lg flex items-end justify-center pb-1">
+                                <span class="text-xs">😴</span>
+                            </div>
+                            <span class="text-xs mt-1">0-5h</span>
+                        </div>
+                        <div class="flex flex-col items-center">
+                            <div class="w-12 h-20 bg-orange-600/50 rounded-lg flex items-end justify-center pb-1">
+                                <span class="text-xs">🚶</span>
+                            </div>
+                            <span class="text-xs mt-1">5-6h</span>
+                        </div>
+                        <div class="flex flex-col items-center">
+                            <div class="w-12 h-20 bg-red-600/50 rounded-lg flex items-end justify-center pb-1">
+                                <span class="text-xs">🍖</span>
+                            </div>
+                            <span class="text-xs mt-1">6-7h</span>
+                        </div>
+                        <div class="flex flex-col items-center">
+                            <div class="w-12 h-20 bg-blue-600/50 rounded-lg flex items-end justify-center pb-1">
+                                <span class="text-xs">🚶</span>
+                            </div>
+                            <span class="text-xs mt-1">7-9h</span>
+                        </div>
+                        <div class="flex flex-col items-center">
+                            <div class="w-12 h-20 bg-purple-600/50 rounded-lg flex items-end justify-center pb-1">
+                                <span class="text-xs">😴</span>
+                            </div>
+                            <span class="text-xs mt-1">9-12h</span>
+                        </div>
+                        <div class="flex flex-col items-center">
+                            <div class="w-12 h-20 bg-purple-600/50 rounded-lg flex items-end justify-center pb-1">
+                                <span class="text-xs">😴</span>
+                            </div>
+                            <span class="text-xs mt-1">12-15h</span>
+                        </div>
+                        <div class="flex flex-col items-center">
+                            <div class="w-12 h-20 bg-orange-600/50 rounded-lg flex items-end justify-center pb-1">
+                                <span class="text-xs">🚶</span>
+                            </div>
+                            <span class="text-xs mt-1">15-16h</span>
+                        </div>
+                        <div class="flex flex-col items-center">
+                            <div class="w-12 h-20 bg-red-600/50 rounded-lg flex items-end justify-center pb-1">
+                                <span class="text-xs">🍖</span>
+                            </div>
+                            <span class="text-xs mt-1">16-17h</span>
+                        </div>
+                        <div class="flex flex-col items-center">
+                            <div class="w-12 h-20 bg-green-600/50 rounded-lg flex items-end justify-center pb-1">
+                                <span class="text-xs">👥</span>
+                            </div>
+                            <span class="text-xs mt-1">17-19h</span>
+                        </div>
+                        <div class="flex flex-col items-center">
+                            <div class="w-12 h-20 bg-yellow-600/50 rounded-lg flex items-end justify-center pb-1">
+                                <span class="text-xs">🏴</span>
+                            </div>
+                            <span class="text-xs mt-1">19-20h</span>
+                        </div>
+                        <div class="flex flex-col items-center">
+                            <div class="w-12 h-20 bg-purple-600/50 rounded-lg flex items-end justify-center pb-1">
+                                <span class="text-xs">😴</span>
+                            </div>
+                            <span class="text-xs mt-1">20-24h</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="flex flex-wrap gap-4 mt-4 text-sm">
+                    <div class="flex items-center gap-2"><span class="w-4 h-4 bg-purple-600/50 rounded"></span> Ngủ/Nghỉ</div>
+                    <div class="flex items-center gap-2"><span class="w-4 h-4 bg-orange-600/50 rounded"></span> Di chuyển</div>
+                    <div class="flex items-center gap-2"><span class="w-4 h-4 bg-red-600/50 rounded"></span> Ăn uống</div>
+                    <div class="flex items-center gap-2"><span class="w-4 h-4 bg-green-600/50 rounded"></span> Tương tác</div>
+                    <div class="flex items-center gap-2"><span class="w-4 h-4 bg-yellow-600/50 rounded"></span> Đánh dấu</div>
+                </div>
+            </div>
+
+            <!-- Notes Section -->
+            <div class="glass-card rounded-2xl p-6">
+                <h2 class="text-xl font-semibold text-amber-400 mb-4">📝 Ghi Chú Quan Sát</h2>
+                <div class="grid md:grid-cols-2 gap-4">
+                    <div>
+                        <label class="block text-sm text-gray-300 mb-2">Thêm ghi chú mới:</label>
+                        <textarea id="noteInput" class="w-full bg-white/10 border border-white/20 rounded-lg p-3 text-white placeholder-gray-400" rows="3" placeholder="Nhập ghi chú về hành vi quan sát được..."></textarea>
+                        <button onclick="addNote()" class="mt-2 px-4 py-2 bg-amber-600 hover:bg-amber-700 rounded-lg transition-colors">
+                            Thêm ghi chú
+                        </button>
+                    </div>
+                    <div>
+                        <p class="text-sm text-gray-300 mb-2">Ghi chú gần đây:</p>
+                        <div id="notesList" class="space-y-2 max-h-40 overflow-y-auto">
+                            <div class="bg-white/10 rounded-lg p-3 text-sm">
+                                <p class="text-gray-300">10:30 - Simba gầm rống 2 lần liên tiếp, có thể phản ứng với tiếng ồn từ công trình gần đó.</p>
+                            </div>
+                            <div class="bg-white/10 rounded-lg p-3 text-sm">
+                                <p class="text-gray-300">08:15 - Ăn sáng tốt, tiêu thụ hết 4kg thịt bò trong 20 phút.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="py-6 px-4 text-center text-gray-400">
+        <div class="glass-card max-w-7xl mx-auto rounded-2xl p-4">
+            <p>🦁 Hệ thống Theo dõi Tập tính Sư tử - Vườn thú Quốc gia © 2024</p>
+            <p class="text-sm mt-1">Được phát triển bởi đội ngũ chuyên gia động vật hoang dã</p>
+        </div>
+    </footer>
+
+    <script>
+        // Update current time
+        function updateTime() {
+            const now = new Date();
+            const options = { 
+                weekday: 'long', 
+                year: 'numeric', 
+                month: 'long', 
+                day: 'numeric',
+                hour: '2-digit',
+                minute: '2-digit',
+                second: '2-digit'
+            };
+            document.getElementById('currentTime').textContent = now.toLocaleDateString('vi-VN', options);
+        }
+        updateTime();
+        setInterval(updateTime, 1000);
+
+        // Add note function
+        function addNote() {
+            const input = document.getElementById('noteInput');
+            const notesList = document.getElementById('notesList');
+            
+            if (input.value.trim()) {
+                const now = new Date();
+                const time = now.toLocaleTimeString('vi-VN', { hour: '2-digit', minute: '2-digit' });
+                
+                const noteDiv = document.createElement('div');
+                noteDiv.className = 'bg-white/10 rounded-lg p-3 text-sm';
+                noteDiv.innerHTML = `<p class="text-gray-300">${time} - ${input.value}</p>`;
+                
+                notesList.insertBefore(noteDiv, notesList.firstChild);
+                input.value = '';
+            }
+        }
+
+        // Simulate live data updates
+        function simulateDataUpdates() {
+            // Random small fluctuations in values
+            const walkingValue = 60 + Math.floor(Math.random() * 15);
+            document.getElementById('walking-value').textContent = walkingValue + '%';
+            document.getElementById('walking-bar').style.width = walkingValue + '%';
+
+            const runningValue = 20 + Math.floor(Math.random() * 15);
+            document.getElementById('running-value').textContent = runningValue + '%';
+            document.getElementById('running-bar').style.width = runningValue + '%';
+
+            const sleepHours = (13 + Math.random() * 3).toFixed(1);
+            document.getElementById('sleep-hours').textContent = sleepHours;
+
+            const restHours = (3 + Math.random() * 2).toFixed(1);
+            document.getElementById('rest-hours').textContent = restHours;
+        }
+
+        // Update data every 30 seconds
+        setInterval(simulateDataUpdates, 30000);
+
+        // Allow Enter key to add notes
+        document.getElementById('noteInput').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter' && !e.shiftKey) {
+                e.preventDefault();
+                addNote();
+            }
+        });
+    </script>
+</body>
+</html>
