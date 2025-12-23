@@ -3,352 +3,1037 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Theo Dõi Tập Tính 12 Con Dê</title>
+    <title>ThS. Nguyễn Tiến Sĩ | Chuyên gia An Toàn Sinh Học | Biosecurity Expert</title>
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         * {
-            font-family: 'Nunito', sans-serif;
+            font-family: 'Inter', sans-serif;
         }
-        body {
-            background-image: url('https://images.unsplash.com/photo-1524024973431-2ad916746881?w=1920&q=80');
-            background-size: cover;
-            background-position: center;
-            background-attachment: fixed;
-            min-height: 100vh;
+        .font-serif {
+            font-family: 'Playfair Display', serif;
         }
-        body::before {
+        .gradient-primary {
+            background: linear-gradient(135deg, #0ea5e9 0%, #06b6d4 50%, #10b981 100%);
+        }
+        .gradient-text {
+            background: linear-gradient(135deg, #0ea5e9 0%, #10b981 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        .glass-card {
+            background: rgba(255, 255, 255, 0.9);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+        }
+        .hero-bg {
+            background: linear-gradient(135deg, #f0fdfa 0%, #ecfeff 25%, #f0f9ff 50%, #fefce8 100%);
+        }
+        .session-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.15);
+        }
+        .nav-link {
+            position: relative;
+        }
+        .nav-link::after {
             content: '';
-            position: fixed;
-            top: 0;
+            position: absolute;
+            bottom: -4px;
             left: 0;
+            width: 0;
+            height: 2px;
+            background: linear-gradient(90deg, #0ea5e9, #10b981);
+            transition: width 0.3s ease;
+        }
+        .nav-link:hover::after {
             width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.5);
-            z-index: -1;
         }
-        .goat-card {
-            backdrop-filter: blur(10px);
-            background: rgba(255, 255, 255, 0.9);
-            transition: all 0.3s ease;
+        .floating {
+            animation: floating 3s ease-in-out infinite;
         }
-        .goat-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 20px 40px rgba(0,0,0,0.3);
-        }
-        .behavior-btn {
-            transition: all 0.2s ease;
-        }
-        .behavior-btn:hover {
-            transform: scale(1.1);
-        }
-        .behavior-btn.active {
-            ring: 4px;
-            ring-color: #10b981;
-        }
-        .header-bg {
-            backdrop-filter: blur(15px);
-            background: rgba(255, 255, 255, 0.85);
-        }
-        .stats-card {
-            backdrop-filter: blur(10px);
-            background: rgba(255, 255, 255, 0.9);
-        }
-        @keyframes bounce-slow {
-            0%, 100% { transform: translateY(0); }
+        @keyframes floating {
+            0%, 100% { transform: translateY(0px); }
             50% { transform: translateY(-10px); }
         }
-        .goat-emoji {
-            animation: bounce-slow 2s infinite;
+        .pulse-glow {
+            animation: pulse-glow 2s ease-in-out infinite;
+        }
+        @keyframes pulse-glow {
+            0%, 100% { box-shadow: 0 0 20px rgba(14, 165, 233, 0.3); }
+            50% { box-shadow: 0 0 40px rgba(14, 165, 233, 0.6); }
+        }
+        .scroll-indicator {
+            animation: bounce 2s infinite;
+        }
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
+            40% { transform: translateY(-10px); }
+            60% { transform: translateY(-5px); }
+        }
+        html {
+            scroll-behavior: smooth;
+        }
+        .section-divider {
+            height: 4px;
+            background: linear-gradient(90deg, transparent, #0ea5e9, #10b981, transparent);
         }
     </style>
 </head>
-<body class="min-h-screen p-4 md:p-6">
-    <!-- Header -->
-    <header class="header-bg rounded-2xl shadow-xl p-6 mb-6 max-w-7xl mx-auto">
-        <div class="flex flex-col md:flex-row items-center justify-between gap-4">
-            <div class="flex items-center gap-4">
-                <span class="text-5xl goat-emoji">🐐</span>
-                <div>
-                    <h1 class="text-2xl md:text-3xl font-extrabold text-gray-800">Theo Dõi Tập Tính Đàn Dê</h1>
-                    <p class="text-gray-600">Quản lý 12 con dê nuôi nhốt hàng ngày</p>
+<body class="bg-gray-50">
+    <!-- Navigation -->
+    <nav id="navbar" class="fixed top-0 left-0 right-0 z-50 transition-all duration-300 bg-white/80 backdrop-blur-lg shadow-sm">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16 md:h-20">
+                <a href="#home" class="flex items-center space-x-3">
+                    <div class="w-10 h-10 md:w-12 md:h-12 gradient-primary rounded-xl flex items-center justify-center">
+                        <i class="fas fa-shield-virus text-white text-lg md:text-xl"></i>
+                    </div>
+                    <div class="hidden sm:block">
+                        <p class="font-bold text-gray-800 text-sm md:text-base">ThS. Nguyễn Tiến Sĩ</p>
+                        <p class="text-xs text-gray-500">Biosecurity Expert</p>
+                    </div>
+                </a>
+                
+                <!-- Desktop Menu -->
+                <div class="hidden lg:flex items-center space-x-8">
+                    <a href="#home" class="nav-link text-gray-700 hover:text-cyan-600 font-medium transition">Trang chủ</a>
+                    <a href="#about" class="nav-link text-gray-700 hover:text-cyan-600 font-medium transition">Giới thiệu</a>
+                    <a href="#course" class="nav-link text-gray-700 hover:text-cyan-600 font-medium transition">Khóa học</a>
+                    <a href="#deliverables" class="nav-link text-gray-700 hover:text-cyan-600 font-medium transition">Sản phẩm</a>
+                    <a href="#contact" class="gradient-primary text-white px-6 py-2.5 rounded-full font-medium hover:opacity-90 transition shadow-lg">
+                        Liên hệ
+                    </a>
                 </div>
-            </div>
-            <div class="flex items-center gap-4">
-                <div class="text-center">
-                    <input type="date" id="currentDate" class="px-4 py-2 rounded-lg border-2 border-green-300 focus:border-green-500 focus:outline-none font-semibold">
-                </div>
-                <button onclick="exportData()" class="bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded-lg font-semibold transition flex items-center gap-2">
-                    📊 Xuất báo cáo
+
+                <!-- Mobile Menu Button -->
+                <button id="mobile-menu-btn" class="lg:hidden p-2 rounded-lg hover:bg-gray-100">
+                    <i class="fas fa-bars text-xl text-gray-700"></i>
                 </button>
             </div>
         </div>
-    </header>
 
-    <!-- Stats Overview -->
-    <div class="max-w-7xl mx-auto mb-6 grid grid-cols-2 md:grid-cols-4 gap-4">
-        <div class="stats-card rounded-xl p-4 text-center shadow-lg">
-            <div class="text-3xl mb-2">🍽️</div>
-            <div class="text-2xl font-bold text-green-600" id="eatingCount">0</div>
-            <div class="text-gray-600 text-sm">Đang ăn</div>
-        </div>
-        <div class="stats-card rounded-xl p-4 text-center shadow-lg">
-            <div class="text-3xl mb-2">😴</div>
-            <div class="text-2xl font-bold text-blue-600" id="sleepingCount">0</div>
-            <div class="text-gray-600 text-sm">Đang ngủ</div>
-        </div>
-        <div class="stats-card rounded-xl p-4 text-center shadow-lg">
-            <div class="text-3xl mb-2">🏃</div>
-            <div class="text-2xl font-bold text-orange-600" id="playingCount">0</div>
-            <div class="text-gray-600 text-sm">Đang chơi</div>
-        </div>
-        <div class="stats-card rounded-xl p-4 text-center shadow-lg">
-            <div class="text-3xl mb-2">💚</div>
-            <div class="text-2xl font-bold text-emerald-600" id="healthyCount">12</div>
-            <div class="text-gray-600 text-sm">Khỏe mạnh</div>
-        </div>
-    </div>
-
-    <!-- Goat Grid -->
-    <div class="max-w-7xl mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5" id="goatGrid">
-        <!-- Goat cards will be generated here -->
-    </div>
-
-    <!-- Note Modal -->
-    <div id="noteModal" class="fixed inset-0 bg-black/50 backdrop-blur-sm hidden items-center justify-center z-50">
-        <div class="bg-white rounded-2xl p-6 max-w-md w-full mx-4 shadow-2xl">
-            <h3 class="text-xl font-bold mb-4 flex items-center gap-2">
-                <span class="text-2xl">📝</span> Ghi chú cho <span id="modalGoatName"></span>
-            </h3>
-            <textarea id="noteText" rows="4" class="w-full p-3 border-2 border-gray-200 rounded-xl focus:border-green-500 focus:outline-none" placeholder="Nhập ghi chú về tập tính, sức khỏe..."></textarea>
-            <div class="flex gap-3 mt-4">
-                <button onclick="saveNote()" class="flex-1 bg-green-600 hover:bg-green-700 text-white py-2 rounded-xl font-semibold transition">Lưu</button>
-                <button onclick="closeNoteModal()" class="flex-1 bg-gray-200 hover:bg-gray-300 text-gray-700 py-2 rounded-xl font-semibold transition">Hủy</button>
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="lg:hidden hidden bg-white border-t">
+            <div class="px-4 py-4 space-y-3">
+                <a href="#home" class="block py-2 text-gray-700 hover:text-cyan-600 font-medium">Trang chủ | Home</a>
+                <a href="#about" class="block py-2 text-gray-700 hover:text-cyan-600 font-medium">Giới thiệu | About</a>
+                <a href="#course" class="block py-2 text-gray-700 hover:text-cyan-600 font-medium">Khóa học | Course</a>
+                <a href="#deliverables" class="block py-2 text-gray-700 hover:text-cyan-600 font-medium">Sản phẩm | Deliverables</a>
+                <a href="#contact" class="block py-3 gradient-primary text-white text-center rounded-full font-medium">Liên hệ | Contact</a>
             </div>
         </div>
-    </div>
+    </nav>
 
-    <script>
-        // Goat data
-        const goats = [
-            { id: 1, name: "Bông", age: "2 tuổi", gender: "Cái", color: "Trắng" },
-            { id: 2, name: "Đen", age: "3 tuổi", gender: "Đực", color: "Đen" },
-            { id: 3, name: "Nâu", age: "1.5 tuổi", gender: "Cái", color: "Nâu" },
-            { id: 4, name: "Đốm", age: "2 tuổi", gender: "Đực", color: "Đốm" },
-            { id: 5, name: "Mập", age: "4 tuổi", gender: "Cái", color: "Trắng" },
-            { id: 6, name: "Nhỏ", age: "8 tháng", gender: "Cái", color: "Xám" },
-            { id: 7, name: "Sừng Dài", age: "3 tuổi", gender: "Đực", color: "Nâu" },
-            { id: 8, name: "Bé Bi", age: "6 tháng", gender: "Đực", color: "Trắng" },
-            { id: 9, name: "Lông Xù", age: "2.5 tuổi", gender: "Cái", color: "Xám" },
-            { id: 10, name: "Vàng", age: "1 tuổi", gender: "Cái", color: "Vàng nâu" },
-            { id: 11, name: "Đầu Đàn", age: "5 tuổi", gender: "Đực", color: "Đen trắng" },
-            { id: 12, name: "Út", age: "4 tháng", gender: "Cái", color: "Trắng" }
-        ];
+    <!-- Hero Section -->
+    <section id="home" class="hero-bg min-h-screen flex items-center pt-20 relative overflow-hidden">
+        <!-- Decorative Elements -->
+        <div class="absolute top-20 left-10 w-72 h-72 bg-cyan-200/30 rounded-full blur-3xl"></div>
+        <div class="absolute bottom-20 right-10 w-96 h-96 bg-emerald-200/30 rounded-full blur-3xl"></div>
+        <div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-gradient-to-r from-cyan-100/20 to-emerald-100/20 rounded-full blur-3xl"></div>
 
-        const behaviors = [
-            { id: 'eating', emoji: '🍽️', label: 'Ăn', color: 'bg-green-100 hover:bg-green-200 text-green-700' },
-            { id: 'drinking', emoji: '💧', label: 'Uống', color: 'bg-blue-100 hover:bg-blue-200 text-blue-700' },
-            { id: 'sleeping', emoji: '😴', label: 'Ngủ', color: 'bg-purple-100 hover:bg-purple-200 text-purple-700' },
-            { id: 'playing', emoji: '🏃', label: 'Chơi', color: 'bg-orange-100 hover:bg-orange-200 text-orange-700' },
-            { id: 'resting', emoji: '🧘', label: 'Nghỉ', color: 'bg-teal-100 hover:bg-teal-200 text-teal-700' },
-            { id: 'sick', emoji: '🤒', label: 'Ốm', color: 'bg-red-100 hover:bg-red-200 text-red-700' }
-        ];
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 md:py-20 relative z-10">
+            <div class="grid lg:grid-cols-2 gap-12 items-center">
+                <div class="text-center lg:text-left">
+                    <div class="inline-flex items-center px-4 py-2 bg-white/80 rounded-full shadow-sm mb-6">
+                        <span class="w-2 h-2 bg-emerald-500 rounded-full mr-2 animate-pulse"></span>
+                        <span class="text-sm text-gray-600">Đào tạo chuyên sâu | Professional Training</span>
+                    </div>
+                    
+                    <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold text-gray-800 mb-4 leading-tight">
+                        <span class="font-serif">An Toàn Sinh Học</span>
+                        <br>
+                        <span class="gradient-text">Biosecurity</span>
+                    </h1>
+                    
+                    <p class="text-xl md:text-2xl text-gray-600 mb-4 font-light">
+                        Từ những điều cơ bản
+                    </p>
+                    <p class="text-lg md:text-xl text-cyan-600 mb-8 italic">
+                        From the Basics
+                    </p>
 
-        let goatRecords = {};
-        let currentNoteGoatId = null;
+                    <div class="bg-white/70 backdrop-blur-sm rounded-2xl p-6 mb-8 border border-white/50 shadow-xl">
+                        <p class="text-gray-700 leading-relaxed text-lg">
+                            <i class="fas fa-quote-left text-cyan-400 mr-2"></i>
+                            <strong class="text-cyan-700">ATSH mạnh hay yếu</strong> bắt đầu từ những việc nhỏ làm đúng mỗi ngày.
+                            <br>
+                            <span class="text-emerald-600 italic">Strong or weak biosecurity starts with small things done right every day.</span>
+                            <i class="fas fa-quote-right text-cyan-400 ml-2"></i>
+                        </p>
+                    </div>
 
-        // Initialize
-        document.addEventListener('DOMContentLoaded', () => {
-            const today = new Date().toISOString().split('T')[0];
-            document.getElementById('currentDate').value = today;
-            loadData();
-            renderGoatCards();
-            updateStats();
-        });
+                    <div class="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
+                        <a href="#course" class="gradient-primary text-white px-8 py-4 rounded-full font-semibold text-lg hover:opacity-90 transition shadow-xl pulse-glow flex items-center justify-center">
+                            <i class="fas fa-play-circle mr-2"></i>
+                            Khám phá khóa học
+                        </a>
+                        <a href="#contact" class="bg-white text-gray-700 px-8 py-4 rounded-full font-semibold text-lg hover:bg-gray-50 transition shadow-lg border flex items-center justify-center">
+                            <i class="fas fa-phone-alt mr-2 text-cyan-500"></i>
+                            Liên hệ ngay
+                        </a>
+                    </div>
+                </div>
 
-        document.getElementById('currentDate').addEventListener('change', () => {
-            loadData();
-            renderGoatCards();
-            updateStats();
-        });
-
-        function getDateKey() {
-            return document.getElementById('currentDate').value;
-        }
-
-        function loadData() {
-            const saved = localStorage.getItem('goatRecords');
-            if (saved) {
-                goatRecords = JSON.parse(saved);
-            }
-            const dateKey = getDateKey();
-            if (!goatRecords[dateKey]) {
-                goatRecords[dateKey] = {};
-                goats.forEach(g => {
-                    goatRecords[dateKey][g.id] = {
-                        behaviors: [],
-                        note: '',
-                        times: {}
-                    };
-                });
-            }
-        }
-
-        function saveData() {
-            localStorage.setItem('goatRecords', JSON.stringify(goatRecords));
-        }
-
-        function renderGoatCards() {
-            const grid = document.getElementById('goatGrid');
-            const dateKey = getDateKey();
-            grid.innerHTML = goats.map(goat => {
-                const record = goatRecords[dateKey]?.[goat.id] || { behaviors: [], note: '', times: {} };
-                const goatEmojis = ['🐐', '🐑'];
-                const emoji = goat.gender === 'Đực' ? '🐐' : '🐑';
-                
-                return `
-                    <div class="goat-card rounded-2xl p-5 shadow-xl">
-                        <div class="flex items-center justify-between mb-4">
-                            <div class="flex items-center gap-3">
-                                <span class="text-4xl">${emoji}</span>
-                                <div>
-                                    <h3 class="font-bold text-lg text-gray-800">${goat.name}</h3>
-                                    <p class="text-sm text-gray-500">${goat.age} • ${goat.gender} • ${goat.color}</p>
+                <div class="relative">
+                    <div class="floating">
+                        <div class="relative">
+                            <!-- Main Image Placeholder -->
+                            <div class="w-full aspect-square max-w-lg mx-auto bg-gradient-to-br from-cyan-400 to-emerald-500 rounded-3xl shadow-2xl flex items-center justify-center overflow-hidden">
+                                <div class="text-center text-white p-8">
+                                    <i class="fas fa-user-tie text-8xl mb-4 opacity-90"></i>
+                                    <p class="text-xl font-semibold">ThS. Nguyễn Tiến Sĩ</p>
+                                    <p class="text-sm opacity-80">Giảng viên | Lecturer</p>
+                                    <p class="text-sm opacity-80">Đại học Bạc Liêu</p>
                                 </div>
                             </div>
-                            <span class="text-xs font-semibold px-2 py-1 rounded-full ${record.behaviors.includes('sick') ? 'bg-red-100 text-red-600' : 'bg-green-100 text-green-600'}">
-                                ${record.behaviors.includes('sick') ? 'Cần theo dõi' : 'Bình thường'}
-                            </span>
-                        </div>
-                        
-                        <div class="grid grid-cols-3 gap-2 mb-4">
-                            ${behaviors.map(b => `
-                                <button 
-                                    onclick="toggleBehavior(${goat.id}, '${b.id}')"
-                                    class="behavior-btn ${b.color} ${record.behaviors.includes(b.id) ? 'ring-2 ring-offset-1 ring-green-500' : ''} p-2 rounded-xl text-center"
-                                >
-                                    <div class="text-xl">${b.emoji}</div>
-                                    <div class="text-xs font-semibold">${b.label}</div>
-                                    ${record.times[b.id] ? `<div class="text-xs opacity-70">${record.times[b.id]}</div>` : ''}
-                                </button>
-                            `).join('')}
-                        </div>
-                        
-                        <div class="flex gap-2">
-                            <button 
-                                onclick="openNoteModal(${goat.id}, '${goat.name}')"
-                                class="flex-1 bg-gray-100 hover:bg-gray-200 text-gray-700 py-2 px-3 rounded-xl text-sm font-semibold transition flex items-center justify-center gap-1"
-                            >
-                                📝 ${record.note ? 'Xem ghi chú' : 'Thêm ghi chú'}
-                            </button>
-                        </div>
-                        
-                        ${record.note ? `
-                            <div class="mt-3 p-2 bg-yellow-50 rounded-lg text-sm text-gray-600 border border-yellow-200">
-                                <strong>Ghi chú:</strong> ${record.note}
+                            
+                            <!-- Floating Cards -->
+                            <div class="absolute -top-4 -right-4 bg-white rounded-2xl shadow-xl p-4 transform rotate-3">
+                                <div class="flex items-center space-x-3">
+                                    <div class="w-12 h-12 bg-emerald-100 rounded-xl flex items-center justify-center">
+                                        <i class="fas fa-certificate text-emerald-600 text-xl"></i>
+                                    </div>
+                                    <div>
+                                        <p class="font-bold text-gray-800">15+ năm</p>
+                                        <p class="text-sm text-gray-500">Kinh nghiệm</p>
+                                    </div>
+                                </div>
                             </div>
-                        ` : ''}
+
+                            <div class="absolute -bottom-4 -left-4 bg-white rounded-2xl shadow-xl p-4 transform -rotate-3">
+                                <div class="flex items-center space-x-3">
+                                    <div class="w-12 h-12 bg-cyan-100 rounded-xl flex items-center justify-center">
+                                        <i class="fas fa-users text-cyan-600 text-xl"></i>
+                                    </div>
+                                    <div>
+                                        <p class="font-bold text-gray-800">500+</p>
+                                        <p class="text-sm text-gray-500">Học viên</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                `;
-            }).join('');
-        }
+                </div>
+            </div>
+        </div>
 
-        function toggleBehavior(goatId, behaviorId) {
-            const dateKey = getDateKey();
-            const record = goatRecords[dateKey][goatId];
-            const index = record.behaviors.indexOf(behaviorId);
-            
-            if (index > -1) {
-                record.behaviors.splice(index, 1);
-                delete record.times[behaviorId];
+        <!-- Scroll Indicator -->
+        <div class="absolute bottom-8 left-1/2 transform -translate-x-1/2 scroll-indicator">
+            <a href="#about" class="flex flex-col items-center text-gray-400 hover:text-cyan-500 transition">
+                <span class="text-sm mb-2">Cuộn xuống</span>
+                <i class="fas fa-chevron-down text-xl"></i>
+            </a>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="py-20 bg-white relative">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <span class="inline-block px-4 py-2 bg-cyan-50 text-cyan-600 rounded-full text-sm font-medium mb-4">
+                    Giới thiệu | About
+                </span>
+                <h2 class="text-3xl md:text-4xl font-bold text-gray-800 mb-4">
+                    <span class="font-serif">Người đồng hành cùng bạn</span>
+                </h2>
+                <p class="text-lg text-gray-600 italic">Your Partner in Biosecurity Excellence</p>
+            </div>
+
+            <div class="grid lg:grid-cols-2 gap-12 items-center">
+                <div class="space-y-6">
+                    <div class="bg-gradient-to-br from-cyan-50 to-emerald-50 rounded-2xl p-8">
+                        <div class="flex items-start space-x-4">
+                            <div class="w-16 h-16 gradient-primary rounded-2xl flex items-center justify-center flex-shrink-0">
+                                <i class="fas fa-graduation-cap text-white text-2xl"></i>
+                            </div>
+                            <div>
+                                <h3 class="text-xl font-bold text-gray-800 mb-2">ThS. Nguyễn Tiến Sĩ</h3>
+                                <p class="text-gray-600 mb-1">Thạc sĩ ngành Chăn nuôi | Master in Animal Husbandry</p>
+                                <p class="text-cyan-600 font-medium">Giảng viên Khoa Chăn nuôi - Đại học Bạc Liêu</p>
+                                <p class="text-emerald-600 text-sm italic">Lecturer, Faculty of Animal Husbandry - Bac Lieu University</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="grid sm:grid-cols-2 gap-4">
+                        <div class="bg-white border border-gray-100 rounded-xl p-6 shadow-sm hover:shadow-lg transition">
+                            <div class="w-12 h-12 bg-cyan-100 rounded-xl flex items-center justify-center mb-4">
+                                <i class="fas fa-microscope text-cyan-600 text-xl"></i>
+                            </div>
+                            <h4 class="font-semibold text-gray-800 mb-2">Chuyên môn sâu</h4>
+                            <p class="text-sm text-gray-600">Deep Expertise</p>
+                        </div>
+                        <div class="bg-white border border-gray-100 rounded-xl p-6 shadow-sm hover:shadow-lg transition">
+                            <div class="w-12 h-12 bg-emerald-100 rounded-xl flex items-center justify-center mb-4">
+                                <i class="fas fa-chalkboard-teacher text-emerald-600 text-xl"></i>
+                            </div>
+                            <h4 class="font-semibold text-gray-800 mb-2">Đào tạo thực chiến</h4>
+                            <p class="text-sm text-gray-600">Practical Training</p>
+                        </div>
+                        <div class="bg-white border border-gray-100 rounded-xl p-6 shadow-sm hover:shadow-lg transition">
+                            <div class="w-12 h-12 bg-amber-100 rounded-xl flex items-center justify-center mb-4">
+                                <i class="fas fa-handshake text-amber-600 text-xl"></i>
+                            </div>
+                            <h4 class="font-semibold text-gray-800 mb-2">Đồng hành tận tâm</h4>
+                            <p class="text-sm text-gray-600">Dedicated Support</p>
+                        </div>
+                        <div class="bg-white border border-gray-100 rounded-xl p-6 shadow-sm hover:shadow-lg transition">
+                            <div class="w-12 h-12 bg-rose-100 rounded-xl flex items-center justify-center mb-4">
+                                <i class="fas fa-chart-line text-rose-600 text-xl"></i>
+                            </div>
+                            <h4 class="font-semibold text-gray-800 mb-2">Kết quả đo lường được</h4>
+                            <p class="text-sm text-gray-600">Measurable Results</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bg-gradient-to-br from-gray-50 to-white rounded-3xl p-8 shadow-xl border">
+                    <h3 class="text-2xl font-bold text-gray-800 mb-6">
+                        <i class="fas fa-star text-amber-400 mr-2"></i>
+                        Điểm khác biệt | What Makes Us Different
+                    </h3>
+                    <ul class="space-y-4">
+                        <li class="flex items-start space-x-3">
+                            <span class="w-6 h-6 bg-emerald-500 rounded-full flex items-center justify-center flex-shrink-0 mt-1">
+                                <i class="fas fa-check text-white text-xs"></i>
+                            </span>
+                            <div>
+                                <p class="text-gray-700 font-medium">Không lý thuyết suông</p>
+                                <p class="text-sm text-gray-500 italic">No mere theory</p>
+                            </div>
+                        </li>
+                        <li class="flex items-start space-x-3">
+                            <span class="w-6 h-6 bg-emerald-500 rounded-full flex items-center justify-center flex-shrink-0 mt-1">
+                                <i class="fas fa-check text-white text-xs"></i>
+                            </span>
+                            <div>
+                                <p class="text-gray-700 font-medium">Chuẩn trại – người – hành vi</p>
+                                <p class="text-sm text-gray-500 italic">Farm-people-behavior standards</p>
+                            </div>
+                        </li>
+                        <li class="flex items-start space-x-3">
+                            <span class="w-6 h-6 bg-emerald-500 rounded-full flex items-center justify-center flex-shrink-0 mt-1">
+                                <i class="fas fa-check text-white text-xs"></i>
+                            </span>
+                            <div>
+                                <p class="text-gray-700 font-medium">Áp dụng ngay, đo được hiệu quả</p>
+                                <p class="text-sm text-gray-500 italic">Immediate application, measurable effectiveness</p>
+                            </div>
+                        </li>
+                        <li class="flex items-start space-x-3">
+                            <span class="w-6 h-6 bg-emerald-500 rounded-full flex items-center justify-center flex-shrink-0 mt-1">
+                                <i class="fas fa-check text-white text-xs"></i>
+                            </span>
+                            <div>
+                                <p class="text-gray-700 font-medium">Phù hợp điều kiện trại Việt Nam & châu Á</p>
+                                <p class="text-sm text-gray-500 italic">Suitable for Vietnam & Asian farm conditions</p>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Course Section -->
+    <section id="course" class="py-20 bg-gradient-to-b from-gray-50 to-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <span class="inline-block px-4 py-2 bg-emerald-50 text-emerald-600 rounded-full text-sm font-medium mb-4">
+                    Cấu trúc khóa học | Course Structure
+                </span>
+                <h2 class="text-3xl md:text-4xl font-bold text-gray-800 mb-4">
+                    <span class="font-serif">03 Buổi học chuyên sâu</span>
+                </h2>
+                <p class="text-lg text-gray-600 italic">3 Intensive Training Sessions</p>
+            </div>
+
+            <div class="grid md:grid-cols-3 gap-8">
+                <!-- Session 1 -->
+                <div class="session-card bg-white rounded-3xl shadow-xl overflow-hidden transition-all duration-300 border border-gray-100">
+                    <div class="h-3 bg-gradient-to-r from-emerald-400 to-emerald-500"></div>
+                    <div class="p-8">
+                        <div class="flex items-center space-x-3 mb-6">
+                            <span class="w-14 h-14 bg-emerald-100 rounded-2xl flex items-center justify-center">
+                                <span class="text-2xl font-bold text-emerald-600">01</span>
+                            </span>
+                            <div>
+                                <p class="text-sm text-emerald-600 font-medium">BUỔI 1 | SESSION 1</p>
+                                <div class="w-12 h-1 bg-emerald-400 rounded mt-1"></div>
+                            </div>
+                        </div>
+
+                        <h3 class="text-xl font-bold text-gray-800 mb-2">AN TOÀN SINH HỌC – TỪ NHỮNG ĐIỀU CƠ BẢN</h3>
+                        <p class="text-cyan-600 italic mb-4">Biosecurity from the Basics</p>
+
+                        <div class="bg-emerald-50 rounded-xl p-4 mb-6">
+                            <p class="text-sm text-emerald-700">
+                                <i class="fas fa-lightbulb mr-2"></i>
+                                <strong>Thông điệp:</strong> ATSH mạnh hay yếu bắt đầu từ những việc nhỏ làm đúng mỗi ngày.
+                            </p>
+                        </div>
+
+                        <ul class="space-y-3 mb-6">
+                            <li class="flex items-start space-x-2">
+                                <i class="fas fa-check-circle text-emerald-500 mt-1"></i>
+                                <span class="text-gray-600 text-sm">ATSH là gì? ATSH không phải là gì?</span>
+                            </li>
+                            <li class="flex items-start space-x-2">
+                                <i class="fas fa-check-circle text-emerald-500 mt-1"></i>
+                                <span class="text-gray-600 text-sm">Tháp sức khỏe đàn heo</span>
+                            </li>
+                            <li class="flex items-start space-x-2">
+                                <i class="fas fa-check-circle text-emerald-500 mt-1"></i>
+                                <span class="text-gray-600 text-sm">Vì sao sát trùng không đủ?</span>
+                            </li>
+                            <li class="flex items-start space-x-2">
+                                <i class="fas fa-check-circle text-emerald-500 mt-1"></i>
+                                <span class="text-gray-600 text-sm">Thời gian – nhiệt độ – độ ẩm: "Gold Key"</span>
+                            </li>
+                            <li class="flex items-start space-x-2">
+                                <i class="fas fa-check-circle text-emerald-500 mt-1"></i>
+                                <span class="text-gray-600 text-sm">Nguyên tắc: Một chiều – không quay đầu</span>
+                            </li>
+                        </ul>
+
+                        <div class="bg-gray-50 rounded-xl p-4">
+                            <p class="text-sm text-gray-700">
+                                <i class="fas fa-bullseye text-emerald-500 mr-2"></i>
+                                <strong>Kết quả:</strong> Học viên đổi tư duy, hiểu đúng nền móng ATSH.
+                            </p>
+                            <p class="text-xs text-gray-500 italic mt-1">Students change mindset, understand biosecurity fundamentals.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Session 2 -->
+                <div class="session-card bg-white rounded-3xl shadow-xl overflow-hidden transition-all duration-300 border border-gray-100 md:transform md:-translate-y-4">
+                    <div class="h-3 bg-gradient-to-r from-amber-400 to-amber-500"></div>
+                    <div class="p-8">
+                        <div class="flex items-center space-x-3 mb-6">
+                            <span class="w-14 h-14 bg-amber-100 rounded-2xl flex items-center justify-center">
+                                <span class="text-2xl font-bold text-amber-600">02</span>
+                            </span>
+                            <div>
+                                <p class="text-sm text-amber-600 font-medium">BUỔI 2 | SESSION 2</p>
+                                <div class="w-12 h-1 bg-amber-400 rounded mt-1"></div>
+                            </div>
+                        </div>
+
+                        <h3 class="text-xl font-bold text-gray-800 mb-2">AN TOÀN SINH HỌC NÂNG CAO – HỆ THỐNG 3 LỚP</h3>
+                        <p class="text-cyan-600 italic mb-4">Advanced Biosecurity System</p>
+
+                        <div class="bg-amber-50 rounded-xl p-4 mb-6">
+                            <p class="text-sm text-amber-700">
+                                <i class="fas fa-lightbulb mr-2"></i>
+                                <strong>Thông điệp:</strong> Không có một biện pháp ATSH đơn lẻ – chỉ có hệ thống.
+                            </p>
+                        </div>
+
+                        <ul class="space-y-3 mb-6">
+                            <li class="flex items-start space-x-2">
+                                <i class="fas fa-check-circle text-amber-500 mt-1"></i>
+                                <span class="text-gray-600 text-sm">ATSH như hệ thống quản lý rủi ro</span>
+                            </li>
+                            <li class="flex items-start space-x-2">
+                                <i class="fas fa-check-circle text-amber-500 mt-1"></i>
+                                <span class="text-gray-600 text-sm">3 lớp ATSH: Bio-exclusion, Bio-containment, Hành vi</span>
+                            </li>
+                            <li class="flex items-start space-x-2">
+                                <i class="fas fa-check-circle text-amber-500 mt-1"></i>
+                                <span class="text-gray-600 text-sm">Con người là "vector nguy hiểm nhất"</span>
+                            </li>
+                            <li class="flex items-start space-x-2">
+                                <i class="fas fa-check-circle text-amber-500 mt-1"></i>
+                                <span class="text-gray-600 text-sm">Audit ATSH & phát hiện "mắt xích yếu"</span>
+                            </li>
+                            <li class="flex items-start space-x-2">
+                                <i class="fas fa-check-circle text-amber-500 mt-1"></i>
+                                <span class="text-gray-600 text-sm">KPI – kỷ luật – tái đào tạo</span>
+                            </li>
+                        </ul>
+
+                        <div class="bg-gray-50 rounded-xl p-4">
+                            <p class="text-sm text-gray-700">
+                                <i class="fas fa-bullseye text-amber-500 mr-2"></i>
+                                <strong>Kết quả:</strong> Học viên nhìn trại bằng tư duy hệ thống, biết thiết kế ATSH.
+                            </p>
+                            <p class="text-xs text-gray-500 italic mt-1">Students view farms with systems thinking, design biosecurity.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Session 3 -->
+                <div class="session-card bg-white rounded-3xl shadow-xl overflow-hidden transition-all duration-300 border border-gray-100">
+                    <div class="h-3 bg-gradient-to-r from-rose-400 to-rose-500"></div>
+                    <div class="p-8">
+                        <div class="flex items-center space-x-3 mb-6">
+                            <span class="w-14 h-14 bg-rose-100 rounded-2xl flex items-center justify-center">
+                                <span class="text-2xl font-bold text-rose-600">03</span>
+                            </span>
+                            <div>
+                                <p class="text-sm text-rose-600 font-medium">BUỔI 3 | SESSION 3</p>
+                                <div class="w-12 h-1 bg-rose-400 rounded mt-1"></div>
+                            </div>
+                        </div>
+
+                        <h3 class="text-xl font-bold text-gray-800 mb-2">ÁP DỤNG ATSH THỰC CHIẾN TRONG TRANG TRẠI</h3>
+                        <p class="text-cyan-600 italic mb-4">Field Application & SOP Implementation</p>
+
+                        <div class="bg-rose-50 rounded-xl p-4 mb-6">
+                            <p class="text-sm text-rose-700">
+                                <i class="fas fa-lightbulb mr-2"></i>
+                                <strong>Thông điệp:</strong> ATSH chỉ có giá trị khi làm được tại trại.
+                            </p>
+                        </div>
+
+                        <ul class="space-y-3 mb-6">
+                            <li class="flex items-start space-x-2">
+                                <i class="fas fa-check-circle text-rose-500 mt-1"></i>
+                                <span class="text-gray-600 text-sm">Khu cổng & bảo vệ: SOP kiểm soát</span>
+                            </li>
+                            <li class="flex items-start space-x-2">
+                                <i class="fas fa-check-circle text-rose-500 mt-1"></i>
+                                <span class="text-gray-600 text-sm">Nhà xuất bán: Một chiều – không hồi lưu</span>
+                            </li>
+                            <li class="flex items-start space-x-2">
+                                <i class="fas fa-check-circle text-rose-500 mt-1"></i>
+                                <span class="text-gray-600 text-sm">Khu sản xuất: AIAO – nghỉ chuồng</span>
+                            </li>
+                            <li class="flex items-start space-x-2">
+                                <i class="fas fa-check-circle text-rose-500 mt-1"></i>
+                                <span class="text-gray-600 text-sm">Khu cách ly: Theo dõi – xét nghiệm</span>
+                            </li>
+                        </ul>
+
+                        <div class="bg-gray-50 rounded-xl p-4">
+                            <p class="text-sm text-gray-700">
+                                <i class="fas fa-bullseye text-rose-500 mr-2"></i>
+                                <strong>Kết quả:</strong> Học viên làm được SOP, checklist, hành vi chuẩn.
+                            </p>
+                            <p class="text-xs text-gray-500 italic mt-1">Students create SOPs, checklists, standard behaviors.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Field Application Detail -->
+    <section class="py-16 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-12">
+                <h3 class="text-2xl md:text-3xl font-bold text-gray-800 mb-2">
+                    <i class="fas fa-industry text-rose-500 mr-2"></i>
+                    Áp dụng theo từng khu vực
+                </h3>
+                <p class="text-gray-500 italic">Application by Farm Zones</p>
+            </div>
+
+            <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+                <!-- Zone 1 -->
+                <div class="bg-gradient-to-br from-cyan-50 to-white rounded-2xl p-6 border border-cyan-100 hover:shadow-lg transition">
+                    <div class="w-12 h-12 bg-cyan-500 rounded-xl flex items-center justify-center mb-4">
+                        <span class="text-white font-bold">1</span>
+                    </div>
+                    <h4 class="font-bold text-gray-800 mb-2">Khu Cổng & Bảo Vệ</h4>
+                    <p class="text-sm text-cyan-600 italic mb-3">Gate & Security Area</p>
+                    <ul class="text-sm text-gray-600 space-y-2">
+                        <li>• SOP kiểm soát người – xe – vật tư</li>
+                        <li>• Cổng là tuyến phòng thủ số 1</li>
+                    </ul>
+                </div>
+
+                <!-- Zone 2 -->
+                <div class="bg-gradient-to-br from-emerald-50 to-white rounded-2xl p-6 border border-emerald-100 hover:shadow-lg transition">
+                    <div class="w-12 h-12 bg-emerald-500 rounded-xl flex items-center justify-center mb-4">
+                        <span class="text-white font-bold">2</span>
+                    </div>
+                    <h4 class="font-bold text-gray-800 mb-2">Nhà Xuất Bán</h4>
+                    <p class="text-sm text-emerald-600 italic mb-3">Sales/Loading Area</p>
+                    <ul class="text-sm text-gray-600 space-y-2">
+                        <li>• Tách biệt sản xuất</li>
+                        <li>• Một chiều – không hồi lưu</li>
+                        <li>• Vệ sinh & nghỉ khu sau xuất bán</li>
+                    </ul>
+                </div>
+
+                <!-- Zone 3 -->
+                <div class="bg-gradient-to-br from-amber-50 to-white rounded-2xl p-6 border border-amber-100 hover:shadow-lg transition">
+                    <div class="w-12 h-12 bg-amber-500 rounded-xl flex items-center justify-center mb-4">
+                        <span class="text-white font-bold">3</span>
+                    </div>
+                    <h4 class="font-bold text-gray-800 mb-2">Khu Sản Xuất</h4>
+                    <p class="text-sm text-amber-600 italic mb-3">Production Area</p>
+                    <ul class="text-sm text-gray-600 space-y-2">
+                        <li>• Phân khu sạch – trung gian – dơ</li>
+                        <li>• AIAO – nghỉ chuồng</li>
+                        <li>• Thông thoáng – nền khô – giảm khí độc</li>
+                    </ul>
+                </div>
+
+                <!-- Zone 4 -->
+                <div class="bg-gradient-to-br from-rose-50 to-white rounded-2xl p-6 border border-rose-100 hover:shadow-lg transition">
+                    <div class="w-12 h-12 bg-rose-500 rounded-xl flex items-center justify-center mb-4">
+                        <span class="text-white font-bold">4</span>
+                    </div>
+                    <h4 class="font-bold text-gray-800 mb-2">Khu Cách Ly</h4>
+                    <p class="text-sm text-rose-600 italic mb-3">Isolation Area</p>
+                    <ul class="text-sm text-gray-600 space-y-2">
+                        <li>• Heo mới – heo bệnh – vật tư nguy cơ</li>
+                        <li>• Dụng cụ riêng – chăm sóc sau cùng</li>
+                        <li>• Theo dõi – ghi chép – xét nghiệm</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Deliverables Section -->
+    <section id="deliverables" class="py-20 bg-gradient-to-br from-cyan-900 via-cyan-800 to-emerald-900 text-white relative overflow-hidden">
+        <div class="absolute inset-0 opacity-10">
+            <div class="absolute top-0 left-0 w-96 h-96 bg-white rounded-full blur-3xl"></div>
+            <div class="absolute bottom-0 right-0 w-96 h-96 bg-emerald-300 rounded-full blur-3xl"></div>
+        </div>
+
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div class="text-center mb-16">
+                <span class="inline-block px-4 py-2 bg-white/10 text-cyan-200 rounded-full text-sm font-medium mb-4">
+                    Sản phẩm khóa học | Course Deliverables
+                </span>
+                <h2 class="text-3xl md:text-4xl font-bold mb-4">
+                    <span class="font-serif">Bạn nhận được gì?</span>
+                </h2>
+                <p class="text-lg text-cyan-200 italic">What You Will Receive</p>
+            </div>
+
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
+                <div class="bg-white/10 backdrop-blur-sm rounded-2xl p-6 border border-white/20 hover:bg-white/20 transition">
+                    <div class="w-14 h-14 bg-gradient-to-br from-cyan-400 to-cyan-500 rounded-2xl flex items-center justify-center mb-4">
+                        <i class="fas fa-file-powerpoint text-white text-2xl"></i>
+                    </div>
+                    <h4 class="font-bold text-lg mb-2">Slide đào tạo chuẩn</h4>
+                    <p class="text-cyan-200 text-sm italic mb-2">Standard Training Slides</p>
+                    <p class="text-white/80 text-sm">Song ngữ Việt – Anh, thiết kế chuyên nghiệp</p>
+                </div>
+
+                <div class="bg-white/10 backdrop-blur-sm rounded-2xl p-6 border border-white/20 hover:bg-white/20 transition">
+                    <div class="w-14 h-14 bg-gradient-to-br from-emerald-400 to-emerald-500 rounded-2xl flex items-center justify-center mb-4">
+                        <i class="fas fa-clipboard-list text-white text-2xl"></i>
+                    </div>
+                    <h4 class="font-bold text-lg mb-2">Bộ SOP ATSH treo trại</h4>
+                    <p class="text-cyan-200 text-sm italic mb-2">Farm Biosecurity SOPs</p>
+                    <p class="text-white/80 text-sm">Theo từng khu, sẵn sàng in ấn & triển khai</p>
+                </div>
+
+                <div class="bg-white/10 backdrop-blur-sm rounded-2xl p-6 border border-white/20 hover:bg-white/20 transition">
+                    <div class="w-14 h-14 bg-gradient-to-br from-amber-400 to-amber-500 rounded-2xl flex items-center justify-center mb-4">
+                        <i class="fas fa-tasks text-white text-2xl"></i>
+                    </div>
+                    <h4 class="font-bold text-lg mb-2">Checklist audit ATSH</h4>
+                    <p class="text-cyan-200 text-sm italic mb-2">Biosecurity Audit Checklist</p>
+                    <p class="text-white/80 text-sm">Đánh giá định kỳ, phát hiện điểm yếu</p>
+                </div>
+
+                <div class="bg-white/10 backdrop-blur-sm rounded-2xl p-6 border border-white/20 hover:bg-white/20 transition">
+                    <div class="w-14 h-14 bg-gradient-to-br from-rose-400 to-rose-500 rounded-2xl flex items-center justify-center mb-4">
+                        <i class="fas fa-image text-white text-2xl"></i>
+                    </div>
+                    <h4 class="font-bold text-lg mb-2">Poster ATSH</h4>
+                    <p class="text-cyan-200 text-sm italic mb-2">Biosecurity Poster</p>
+                    <p class="text-white/80 text-sm">"Từ những điều cơ bản" - nhắc nhở trực quan</p>
+                </div>
+
+                <div class="bg-white/10 backdrop-blur-sm rounded-2xl p-6 border border-white/20 hover:bg-white/20 transition">
+                    <div class="w-14 h-14 bg-gradient-to-br from-violet-400 to-violet-500 rounded-2xl flex items-center justify-center mb-4">
+                        <i class="fas fa-file-signature text-white text-2xl"></i>
+                    </div>
+                    <h4 class="font-bold text-lg mb-2">Mẫu cam kết hành vi</h4>
+                    <p class="text-cyan-200 text-sm italic mb-2">Behavior Commitment Form</p>
+                    <p class="text-white/80 text-sm">Cho đội kỹ thuật ký cam kết thực hiện</p>
+                </div>
+
+                <div class="bg-white/10 backdrop-blur-sm rounded-2xl p-6 border border-white/20 hover:bg-white/20 transition">
+                    <div class="w-14 h-14 bg-gradient-to-br from-pink-400 to-pink-500 rounded-2xl flex items-center justify-center mb-4">
+                        <i class="fas fa-headset text-white text-2xl"></i>
+                    </div>
+                    <h4 class="font-bold text-lg mb-2">Hỗ trợ sau khóa học</h4>
+                    <p class="text-cyan-200 text-sm italic mb-2">Post-course Support</p>
+                    <p class="text-white/80 text-sm">Tư vấn & giải đáp thắc mắc triển khai</p>
+                </div>
+            </div>
+
+            <!-- Training Formats -->
+            <div class="bg-white/10 backdrop-blur-sm rounded-3xl p-8 border border-white/20">
+                <h3 class="text-2xl font-bold mb-6 text-center">
+                    <i class="fas fa-briefcase mr-2"></i>
+                    Hình thức đào tạo | Training Formats
+                </h3>
+                <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-4">
+                    <div class="text-center p-4">
+                        <div class="w-16 h-16 bg-white/20 rounded-full flex items-center justify-center mx-auto mb-3">
+                            <i class="fas fa-tractor text-2xl"></i>
+                        </div>
+                        <p class="font-medium">Đào tạo trực tiếp tại trại</p>
+                        <p class="text-sm text-cyan-200 italic">On-farm Training</p>
+                    </div>
+                    <div class="text-center p-4">
+                        <div class="w-16 h-16 bg-white/20 rounded-full flex items-center justify-center mx-auto mb-3">
+                            <i class="fas fa-building text-2xl"></i>
+                        </div>
+                        <p class="font-medium">Workshop cho doanh nghiệp</p>
+                        <p class="text-sm text-cyan-200 italic">Corporate Workshop</p>
+                    </div>
+                    <div class="text-center p-4">
+                        <div class="w-16 h-16 bg-white/20 rounded-full flex items-center justify-center mx-auto mb-3">
+                            <i class="fas fa-users-cog text-2xl"></i>
+                        </div>
+                        <p class="font-medium">Coaching đội kỹ thuật</p>
+                        <p class="text-sm text-cyan-200 italic">Technical Team Coaching</p>
+                    </div>
+                    <div class="text-center p-4">
+                        <div class="w-16 h-16 bg-white/20 rounded-full flex items-center justify-center mx-auto mb-3">
+                            <i class="fas fa-sitemap text-2xl"></i>
+                        </div>
+                        <p class="font-medium">Đào tạo nội bộ hệ thống</p>
+                        <p class="text-sm text-cyan-200 italic">In-house System Training</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Packages -->
+            <div class="mt-12 text-center">
+                <h3 class="text-xl font-bold mb-6">Gói đào tạo | Training Packages</h3>
+                <div class="flex flex-wrap justify-center gap-4">
+                    <span class="px-6 py-3 bg-emerald-500/30 border border-emerald-400/50 rounded-full font-medium">
+                        🌱 Khóa cơ bản | Basic Course
+                    </span>
+                    <span class="px-6 py-3 bg-amber-500/30 border border-amber-400/50 rounded-full font-medium">
+                        🚀 Khóa nâng cao | Advanced Course
+                    </span>
+                    <span class="px-6 py-3 bg-rose-500/30 border border-rose-400/50 rounded-full font-medium">
+                        ⭐ Khóa + Coaching 1-1 | Course + 1-1 Coaching
+                    </span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="py-20 bg-white">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <div class="bg-gradient-to-br from-cyan-50 via-white to-emerald-50 rounded-3xl p-12 shadow-xl border">
+                <div class="w-20 h-20 gradient-primary rounded-full flex items-center justify-center mx-auto mb-6">
+                    <i class="fas fa-shield-virus text-white text-3xl"></i>
+                </div>
+                <h2 class="text-3xl md:text-4xl font-bold text-gray-800 mb-4 font-serif">
+                    Sẵn sàng nâng cấp ATSH cho trang trại?
+                </h2>
+                <p class="text-lg text-cyan-600 italic mb-6">Ready to upgrade biosecurity for your farm?</p>
+                <p class="text-gray-600 mb-8 max-w-2xl mx-auto">
+                    Hãy liên hệ ngay để được tư vấn và thiết kế chương trình đào tạo phù hợp với quy mô và nhu cầu của doanh nghiệp bạn.
+                    <br>
+                    <span class="italic text-gray-500">Contact us now for consultation and customized training program design.</span>
+                </p>
+                <a href="#contact" class="inline-flex items-center gradient-primary text-white px-10 py-4 rounded-full font-semibold text-lg hover:opacity-90 transition shadow-xl">
+                    <i class="fas fa-paper-plane mr-3"></i>
+                    Liên hệ ngay | Contact Now
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="py-20 bg-gray-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <span class="inline-block px-4 py-2 bg-cyan-50 text-cyan-600 rounded-full text-sm font-medium mb-4">
+                    Liên hệ | Contact
+                </span>
+                <h2 class="text-3xl md:text-4xl font-bold text-gray-800 mb-4">
+                    <span class="font-serif">Kết nối với tôi</span>
+                </h2>
+                <p class="text-lg text-gray-600 italic">Let's Connect</p>
+            </div>
+
+            <div class="grid lg:grid-cols-2 gap-12">
+                <!-- Contact Info -->
+                <div class="space-y-8">
+                    <div class="bg-white rounded-3xl p-8 shadow-lg">
+                        <div class="flex items-center space-x-4 mb-6">
+                            <div class="w-20 h-20 gradient-primary rounded-2xl flex items-center justify-center">
+                                <i class="fas fa-user-tie text-white text-3xl"></i>
+                            </div>
+                            <div>
+                                <h3 class="text-2xl font-bold text-gray-800">ThS. Nguyễn Tiến Sĩ</h3>
+                                <p class="text-cyan-600">Chuyên gia An Toàn Sinh Học</p>
+                                <p class="text-sm text-gray-500 italic">Biosecurity Expert</p>
+                            </div>
+                        </div>
+                        <p class="text-gray-600 mb-6">
+                            Giảng viên Khoa Chăn nuôi - Trường Đại học Bạc Liêu
+                            <br>
+                            <span class="italic text-gray-500">Lecturer, Faculty of Animal Husbandry - Bac Lieu University</span>
+                        </p>
+                        <div class="h-px bg-gradient-to-r from-transparent via-gray-200 to-transparent my-6"></div>
+                        
+                        <div class="space-y-4">
+                            <a href="tel:+84123456789" class="flex items-center space-x-4 p-4 bg-cyan-50 rounded-xl hover:bg-cyan-100 transition group">
+                                <div class="w-12 h-12 bg-cyan-500 rounded-xl flex items-center justify-center group-hover:scale-110 transition">
+                                    <i class="fas fa-phone-alt text-white"></i>
+                                </div>
+                                <div>
+                                    <p class="text-sm text-gray-500">Điện thoại | Phone</p>
+                                    <p class="font-semibold text-gray-800">0123 456 789</p>
+                                </div>
+                            </a>
+
+                            <a href="mailto:nguyentiensi@blu.edu.vn" class="flex items-center space-x-4 p-4 bg-emerald-50 rounded-xl hover:bg-emerald-100 transition group">
+                                <div class="w-12 h-12 bg-emerald-500 rounded-xl flex items-center justify-center group-hover:scale-110 transition">
+                                    <i class="fas fa-envelope text-white"></i>
+                                </div>
+                                <div>
+                                    <p class="text-sm text-gray-500">Email</p>
+                                    <p class="font-semibold text-gray-800">nguyentiensi@blu.edu.vn</p>
+                                </div>
+                            </a>
+
+                            <div class="flex items-center space-x-4 p-4 bg-amber-50 rounded-xl">
+                                <div class="w-12 h-12 bg-amber-500 rounded-xl flex items-center justify-center">
+                                    <i class="fas fa-map-marker-alt text-white"></i>
+                                </div>
+                                <div>
+                                    <p class="text-sm text-gray-500">Địa chỉ | Address</p>
+                                    <p class="font-semibold text-gray-800">Trường Đại học Bạc Liêu</p>
+                                    <p class="text-sm text-gray-600">Bạc Liêu, Việt Nam</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Social Links -->
+                    <div class="flex justify-center space-x-4">
+                        <a href="#" class="w-12 h-12 bg-blue-600 rounded-xl flex items-center justify-center text-white hover:opacity-80 transition">
+                            <i class="fab fa-facebook-f text-xl"></i>
+                        </a>
+                        <a href="#" class="w-12 h-12 bg-sky-500 rounded-xl flex items-center justify-center text-white hover:opacity-80 transition">
+                            <i class="fab fa-linkedin-in text-xl"></i>
+                        </a>
+                        <a href="#" class="w-12 h-12 bg-green-500 rounded-xl flex items-center justify-center text-white hover:opacity-80 transition">
+                            <i class="fab fa-whatsapp text-xl"></i>
+                        </a>
+                        <a href="#" class="w-12 h-12 bg-gradient-to-br from-pink-500 to-orange-400 rounded-xl flex items-center justify-center text-white hover:opacity-80 transition">
+                            <i class="fab fa-instagram text-xl"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Contact Form -->
+                <div class="bg-white rounded-3xl p-8 shadow-lg">
+                    <h3 class="text-xl font-bold text-gray-800 mb-2">Gửi tin nhắn</h3>
+                    <p class="text-gray-500 italic mb-6">Send a Message</p>
+                    
+                    <form id="contactForm" class="space-y-5">
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-2">
+                                Họ và tên <span class="text-gray-400">| Full Name</span> *
+                            </label>
+                            <input type="text" required class="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-cyan-500 focus:ring-2 focus:ring-cyan-200 transition outline-none" placeholder="Nhập họ và tên...">
+                        </div>
+
+                        <div class="grid md:grid-cols-2 gap-4">
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-2">
+                                    Email *
+                                </label>
+                                <input type="email" required class="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-cyan-500 focus:ring-2 focus:ring-cyan-200 transition outline-none" placeholder="email@example.com">
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-2">
+                                    Điện thoại <span class="text-gray-400">| Phone</span>
+                                </label>
+                                <input type="tel" class="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-cyan-500 focus:ring-2 focus:ring-cyan-200 transition outline-none" placeholder="0123 456 789">
+                            </div>
+                        </div>
+
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-2">
+                                Doanh nghiệp / Trang trại <span class="text-gray-400">| Company / Farm</span>
+                            </label>
+                            <input type="text" class="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-cyan-500 focus:ring-2 focus:ring-cyan-200 transition outline-none" placeholder="Tên doanh nghiệp hoặc trang trại...">
+                        </div>
+
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-2">
+                                Quan tâm đến <span class="text-gray-400">| Interested in</span>
+                            </label>
+                            <select class="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-cyan-500 focus:ring-2 focus:ring-cyan-200 transition outline-none">
+                                <option value="">Chọn hình thức đào tạo...</option>
+                                <option value="basic">Khóa cơ bản | Basic Course</option>
+                                <option value="advanced">Khóa nâng cao | Advanced Course</option>
+                                <option value="coaching">Khóa + Coaching 1-1 | Course + Coaching</option>
+                                <option value="corporate">Workshop doanh nghiệp | Corporate Workshop</option>
+                                <option value="other">Khác | Other</option>
+                            </select>
+                        </div>
+
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-2">
+                                Nội dung tin nhắn <span class="text-gray-400">| Message</span> *
+                            </label>
+                            <textarea required rows="4" class="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-cyan-500 focus:ring-2 focus:ring-cyan-200 transition outline-none resize-none" placeholder="Mô tả nhu cầu của bạn..."></textarea>
+                        </div>
+
+                        <button type="submit" class="w-full gradient-primary text-white py-4 rounded-xl font-semibold text-lg hover:opacity-90 transition shadow-lg flex items-center justify-center">
+                            <i class="fas fa-paper-plane mr-2"></i>
+                            Gửi tin nhắn | Send Message
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-white py-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid md:grid-cols-3 gap-8 mb-8">
+                <div>
+                    <div class="flex items-center space-x-3 mb-4">
+                        <div class="w-12 h-12 gradient-primary rounded-xl flex items-center justify-center">
+                            <i class="fas fa-shield-virus text-white text-xl"></i>
+                        </div>
+                        <div>
+                            <p class="font-bold">ThS. Nguyễn Tiến Sĩ</p>
+                            <p class="text-sm text-gray-400">Biosecurity Expert</p>
+                        </div>
+                    </div>
+                    <p class="text-gray-400 text-sm">
+                        Đào tạo An Toàn Sinh Học chuyên nghiệp cho ngành chăn nuôi Việt Nam.
+                        <br>
+                        <span class="italic">Professional Biosecurity Training for Vietnam's Livestock Industry.</span>
+                    </p>
+                </div>
+
+                <div>
+                    <h4 class="font-bold mb-4">Liên kết nhanh | Quick Links</h4>
+                    <ul class="space-y-2 text-gray-400">
+                        <li><a href="#home" class="hover:text-cyan-400 transition">Trang chủ | Home</a></li>
+                        <li><a href="#about" class="hover:text-cyan-400 transition">Giới thiệu | About</a></li>
+                        <li><a href="#course" class="hover:text-cyan-400 transition">Khóa học | Course</a></li>
+                        <li><a href="#contact" class="hover:text-cyan-400 transition">Liên hệ | Contact</a></li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h4 class="font-bold mb-4">Thông tin liên hệ | Contact Info</h4>
+                    <ul class="space-y-2 text-gray-400 text-sm">
+                        <li class="flex items-center space-x-2">
+                            <i class="fas fa-university text-cyan-400"></i>
+                            <span>Đại học Bạc Liêu | Bac Lieu University</span>
+                        </li>
+                        <li class="flex items-center space-x-2">
+                            <i class="fas fa-envelope text-cyan-400"></i>
+                            <span>nguyentiensi@blu.edu.vn</span>
+                        </li>
+                        <li class="flex items-center space-x-2">
+                            <i class="fas fa-phone text-cyan-400"></i>
+                            <span>0123 456 789</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="border-t border-gray-800 pt-8 text-center">
+                <p class="text-gray-400 text-sm">
+                    © 2024 ThS. Nguyễn Tiến Sĩ. All rights reserved.
+                    <br>
+                    <span class="text-xs">Designed with <i class="fas fa-heart text-rose-500"></i> for Biosecurity Excellence</span>
+                </p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Back to Top Button -->
+    <button id="backToTop" class="fixed bottom-8 right-8 w-14 h-14 gradient-primary rounded-full shadow-xl text-white flex items-center justify-center opacity-0 invisible transition-all duration-300 hover:scale-110 z-50">
+        <i class="fas fa-arrow-up text-xl"></i>
+    </button>
+
+    <script>
+        // Mobile Menu Toggle
+        const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+
+        mobileMenuBtn.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+            const icon = mobileMenuBtn.querySelector('i');
+            icon.classList.toggle('fa-bars');
+            icon.classList.toggle('fa-times');
+        });
+
+        // Close mobile menu when clicking a link
+        mobileMenu.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenu.classList.add('hidden');
+                const icon = mobileMenuBtn.querySelector('i');
+                icon.classList.add('fa-bars');
+                icon.classList.remove('fa-times');
+            });
+        });
+
+        // Navbar scroll effect
+        const navbar = document.getElementById('navbar');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 50) {
+                navbar.classList.add('shadow-lg');
             } else {
-                record.behaviors.push(behaviorId);
-                record.times[behaviorId] = new Date().toLocaleTimeString('vi-VN', { hour: '2-digit', minute: '2-digit' });
+                navbar.classList.remove('shadow-lg');
             }
-            
-            saveData();
-            renderGoatCards();
-            updateStats();
-        }
+        });
 
-        function openNoteModal(goatId, goatName) {
-            currentNoteGoatId = goatId;
-            document.getElementById('modalGoatName').textContent = goatName;
-            const dateKey = getDateKey();
-            document.getElementById('noteText').value = goatRecords[dateKey][goatId]?.note || '';
-            document.getElementById('noteModal').classList.remove('hidden');
-            document.getElementById('noteModal').classList.add('flex');
-        }
+        // Back to Top Button
+        const backToTop = document.getElementById('backToTop');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 500) {
+                backToTop.classList.remove('opacity-0', 'invisible');
+                backToTop.classList.add('opacity-100', 'visible');
+            } else {
+                backToTop.classList.add('opacity-0', 'invisible');
+                backToTop.classList.remove('opacity-100', 'visible');
+            }
+        });
 
-        function closeNoteModal() {
-            document.getElementById('noteModal').classList.add('hidden');
-            document.getElementById('noteModal').classList.remove('flex');
-            currentNoteGoatId = null;
-        }
+        backToTop.addEventListener('click', () => {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
 
-        function saveNote() {
-            const dateKey = getDateKey();
-            goatRecords[dateKey][currentNoteGoatId].note = document.getElementById('noteText').value;
-            saveData();
-            renderGoatCards();
-            closeNoteModal();
-        }
+        // Form submission
+        const contactForm = document.getElementById('contactForm');
+        contactForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            alert('Cảm ơn bạn đã liên hệ! Chúng tôi sẽ phản hồi sớm nhất có thể.\n\nThank you for contacting us! We will respond as soon as possible.');
+            contactForm.reset();
+        });
 
-        function updateStats() {
-            const dateKey = getDateKey();
-            const records = goatRecords[dateKey];
-            
-            let eating = 0, sleeping = 0, playing = 0, healthy = 12;
-            
-            Object.values(records).forEach(record => {
-                if (record.behaviors.includes('eating')) eating++;
-                if (record.behaviors.includes('sleeping')) sleeping++;
-                if (record.behaviors.includes('playing')) playing++;
-                if (record.behaviors.includes('sick')) healthy--;
-            });
-            
-            document.getElementById('eatingCount').textContent = eating;
-            document.getElementById('sleepingCount').textContent = sleeping;
-            document.getElementById('playingCount').textContent = playing;
-            document.getElementById('healthyCount').textContent = healthy;
-        }
+        // Intersection Observer for animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
 
-        function exportData() {
-            const dateKey = getDateKey();
-            const records = goatRecords[dateKey];
-            
-            let report = `BÁO CÁO TẬP TÍNH ĐÀN DÊ - NGÀY ${dateKey}\n`;
-            report += '='.repeat(50) + '\n\n';
-            
-            goats.forEach(goat => {
-                const record = records[goat.id];
-                report += `🐐 ${goat.name} (${goat.age}, ${goat.gender})\n`;
-                report += `   Màu: ${goat.color}\n`;
-                report += `   Tập tính: ${record.behaviors.map(b => {
-                    const behavior = behaviors.find(bh => bh.id === b);
-                    return `${behavior.emoji} ${behavior.label} (${record.times[b] || ''})`;
-                }).join(', ') || 'Chưa ghi nhận'}\n`;
-                if (record.note) {
-                    report += `   Ghi chú: ${record.note}\n`;
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('animate-fade-in');
                 }
-                report += '\n';
             });
-            
-            // Download as text file
-            const blob = new Blob([report], { type: 'text/plain;charset=utf-8' });
-            const url = URL.createObjectURL(blob);
-            const a = document.createElement('a');
-            a.href = url;
-            a.download = `bao-cao-de-${dateKey}.txt`;
-            a.click();
-            URL.revokeObjectURL(url);
-        }
+        }, observerOptions);
 
-        // Close modal on outside click
-        document.getElementById('noteModal').addEventListener('click', (e) => {
-            if (e.target.id === 'noteModal') {
-                closeNoteModal();
-            }
+        document.querySelectorAll('section').forEach(section => {
+            observer.observe(section);
         });
     </script>
 </body>
